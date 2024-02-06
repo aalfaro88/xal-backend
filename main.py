@@ -4,11 +4,14 @@ from flask_cors import CORS
 from app.routes.stackexchange import stack_exchange
 from dotenv import load_dotenv
 
-load_dotenv()  
-
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
+
+# Load your configuration values, including KEY
+app.config['CLIENT_ID'] = os.getenv('CLIENT_ID')
+app.config['KEY'] = os.getenv('KEY')
 
 app.register_blueprint(stack_exchange, url_prefix='/stackexchange')
 
