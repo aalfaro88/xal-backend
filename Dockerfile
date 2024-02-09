@@ -1,17 +1,35 @@
-# Usar una imagen base de Python
+# Use an official Python runtime as a parent image
 FROM python:3.8-slim
 
-# Establecer el directorio de trabajo en el contenedor
+# Set the working directory in the container
 WORKDIR /app
 
-# Copiar los archivos del proyecto al contenedor
+# Install system dependencies required for mysqlclient
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libc-dev \
+    libmariadb-dev-compat \
+    libmariadb-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy the current directory contents into the container at /app
 COPY . /app
 
-# Instalar las dependencias del proyecto
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Exponer el puerto en el que la aplicación estará escuchando
+# Make port 5001 available to the world outside this container
 EXPOSE 5001
 
-# Comando para ejecutar la aplicación
-CMD ["python", "./app/main.py"]
+# Define environment variable
+ENV FLASK_APP=main.py
+ENV FLASK_RUN_HOST=0.0.0.0
+
+# Run the application
+CMD ["flask", "run", "--port=5001"]
+
+
+
+
+

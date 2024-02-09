@@ -1,6 +1,6 @@
 __pycache__/
 *.pyc
-.env
+
 .DS_Store  # For macOS users
 venv/
 .idea/  # If you're using JetBrains IDEs like PyCharm

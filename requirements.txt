@@ -1,3 +1,12 @@
 Flask
 requests
 flasgger
+mysqlclient
+Flask-CORS
+python-dotenv
+Flask-SQLAlchemy
+pymysql
+cryptography
+flask_mysqldb
+sqlalchemy-utils
+mysql-connector-python
